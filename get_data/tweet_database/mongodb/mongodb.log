@@ -1,0 +1,13 @@
+2019-12-02T12:05:25.040+0900 I CONTROL  [main] Automatically disabling TLS 1.0, to force-enable TLS 1.0 specify --sslDisabledProtocols 'none'
+2019-12-02T12:05:25.049+0900 I CONTROL  [initandlisten] MongoDB starting : pid=71664 port=27017 dbpath=/Users/taka/Documents/Distributed-backup/get_data/tweet_database/mongodb 64-bit host=mbp.local
+2019-12-02T12:05:25.049+0900 I CONTROL  [initandlisten] db version v4.0.13
+2019-12-02T12:05:25.049+0900 I CONTROL  [initandlisten] git version: bda366f0b0e432ca143bc41da54d8732bd8d03c0
+2019-12-02T12:05:25.049+0900 I CONTROL  [initandlisten] allocator: system
+2019-12-02T12:05:25.049+0900 I CONTROL  [initandlisten] modules: none
+2019-12-02T12:05:25.049+0900 I CONTROL  [initandlisten] build environment:
+2019-12-02T12:05:25.049+0900 I CONTROL  [initandlisten]     distarch: x86_64
+2019-12-02T12:05:25.049+0900 I CONTROL  [initandlisten]     target_arch: x86_64
+2019-12-02T12:05:25.049+0900 I CONTROL  [initandlisten] options: { processManagement: { fork: true }, storage: { dbPath: "/Users/taka/Documents/Distributed-backup/get_data/tweet_database/mongodb" }, systemLog: { destination: "file", path: "/Users/taka/Documents/Distributed-backup/get_data/tweet_database/mongodb/mongodb.log" } }
+2019-12-02T12:05:25.050+0900 E STORAGE  [initandlisten] Failed to set up listener: SocketException: Address already in use
+2019-12-02T12:05:25.050+0900 I CONTROL  [initandlisten] now exiting
+2019-12-02T12:05:25.050+0900 I CONTROL  [initandlisten] shutting down with code:48

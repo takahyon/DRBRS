@@ -1,0 +1,24 @@
+{
+  "GAE": [
+    {
+      "HDD": 500,
+      "Type": "N2"
+
+    },{
+      "SSD":500,
+      "Type": "N1"
+    }
+  ],
+  "GKE": [
+    {
+      "node": ["node-1","node-2"]
+    },
+  "FireStore":[
+      {
+        "db1": {
+          "collection": ["c1","c2"]
+        }
+      }
+    ]
+  ]
+}
