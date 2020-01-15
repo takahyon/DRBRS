@@ -30,9 +30,9 @@ dom_x,dom_y = get_data('dom')
 app.layout = html.Div(children=[
     html.H1(children='DRBRS Model Monitor'),
 
-    html.Div(children='''
-        divの文章
-    '''),
+    # html.Div(children='''
+    #     divの文章
+    # '''),
 
     dcc.Graph(
         id='example-graph',
@@ -45,9 +45,9 @@ app.layout = html.Div(children=[
             }
         }
     ),
-    html.Div(children='''
-    divの文章
-'''),
+#     html.Div(children='''
+#     divの文章
+# '''),
 
     dcc.Graph(
         id='disaster-graph',

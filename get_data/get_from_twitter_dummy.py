@@ -57,7 +57,7 @@ def get_data(disasterlistpath, maxTweet=None):
 
 def get_data_process(disaster_name,disaster_date,maxTweet):
     disaster_date = datetime.strptime(disaster_date,"%Y-%m-%d %H:%M:%S")
-    since = disaster_date + timedelta(hours=-2)
+    since = disaster_date + timedelta(hours=-4)
     until = disaster_date + timedelta(hours=+1)
 
     sincestr = since.strftime("%Y-%m-%d_%H:%M:%S_JST")

@@ -27,15 +27,26 @@ def get_data(model):
 
     process_list = []
     timelist = []
+    countdict = {}
     if(model=="dom"):
         db = client["tweets"]
         # コレクション(Table)作成
         collection = db['eq']
-        for post in tqdm(collection.find({"disaster_name":"東日本大震災"}).sort('date',-1)):
+        for post in collection.find({"disaster_name":"東日本大震災"}).sort('date',-1):
             dt = datetime.strptime(post['date'], '%Y-%m-%d %H:%M:%S')
-            dt2 = "{0:%Y-%m-%d %H:%M}".format(dt+timedelta(hours=+9))
-            timelist.append(datetime.strptime(dt2,'%Y-%m-%d %H:%M'))
+            dt2 = "{0:%Y-%m-%d %H:%M}".format(dt)
+            timelist.append(dt2)
             # ここのみ、seabornを用いて可視化
+
+        disdate = datetime.strptime("{0:%Y-%m-%d %H:%M}".format(datetime.strptime(disaster_list["東日本大震災"], '%Y-%m-%d %H:%M:%S')), '%Y-%m-%d %H:%M')
+        since = disdate + timedelta(hours=-2)
+        until = disdate + timedelta(hours=+1)
+        for d in range(189):
+            if since != until:
+                countdict.update({"{0:%Y-%m-%d %H:%M}".format(since):0})
+                since = since+timedelta(minutes=+1)
+            if since == until:
+                break
 
     if (model == "csm"):
         db = client["csm"]
@@ -45,8 +56,19 @@ def get_data(model):
         for post in tqdm(collection.find().sort('date', -1)):
             dt = datetime.strptime(post['date'], '%Y-%m-%d %H:%M:%S')
             dt2 = "{0:%Y-%m-%d %H:%M}".format(dt)
-            timelist.append(datetime.strptime(dt2, '%Y-%m-%d %H:%M'))
+            timelist.append(dt2)
             # ここのみ、seabornを用いて可視化
+
+
+        disdate = datetime.strptime("{0:%Y-%m-%d %H:%M}".format(datetime.strptime(date, '%Y-%m-%d %H:%M:%S')), '%Y-%m-%d %H:%M')
+        since = disdate + timedelta(hours=-2)
+        until = disdate + timedelta(hours=+1)
+        for d in range(189):
+            if since != until:
+                countdict.update({"{0:%Y-%m-%d %H:%M}".format(since):0})
+                since = since+timedelta(minutes=+1)
+            if since == until:
+                break
 
     from collections import Counter
 
@@ -55,11 +77,9 @@ def get_data(model):
     data_x = []
     data_y = []
 
-    for x,y in count.items():
-        data_x.append(x)
-        data_y.append(y)
-
-    return data_x,data_y
+    for x, y in count.items():
+        countdict.update({x: y})
+    return countdict.keys(),countdict.values()
 
 def make_graph():
     # Using graph_objects
