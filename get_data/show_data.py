@@ -33,7 +33,7 @@ def show_dom(disaster_name):
 
     count = Counter(timelist)
 
-    delta = timedelt a(days=1)
+    delta = timedelta(days=1)
 
     data_x = []
     data_y = []
@@ -43,6 +43,7 @@ def show_dom(disaster_name):
         data_y.append(y)
 
     sns.lineplot(data_x,data_y)
+
     plt.title(disaster_name)
     plt.show()
 

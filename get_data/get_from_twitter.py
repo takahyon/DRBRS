@@ -57,8 +57,8 @@ def get_data(disasterlistpath, maxTweet=None):
 
 def get_data_process(disaster_name,disaster_date,maxTweet):
     disaster_date = datetime.strptime(disaster_date,"%Y-%m-%d %H:%M:%S")
-    since = disaster_date + timedelta(days=-3)
-    until = disaster_date + timedelta(hours=+9)
+    since = disaster_date + timedelta(hours=-1)
+    until = disaster_date + timedelta(hours=+3)
 
     sincestr = since.strftime("%Y-%m-%d")
     untilstr = until.strftime("%Y-%m-%d")
@@ -66,7 +66,7 @@ def get_data_process(disaster_name,disaster_date,maxTweet):
     if maxTweet is not None:
         tweetCriteria = got.manager.TweetCriteria().setSince(sincestr).setUntil(untilstr).setMaxTweets(maxTweet).setQuerySearch("地震")
     if maxTweet is None:
-        tweetCriteria = got.manager.TweetCriteria().setSince(sincestr).setUntil(untilstr).setQuerySearch("沢尻エリカ")
+        tweetCriteria = got.manager.TweetCriteria().setSince(sincestr).setUntil(untilstr).setMaxTweets(100000).setQuerySearch("地震")
 
     #tweets = got.manager.TweetManager.getTweets(tweetCriteria)
 
