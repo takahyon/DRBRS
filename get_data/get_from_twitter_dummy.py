@@ -98,7 +98,7 @@ def get_data_process(disaster_name,disaster_date,maxTweet):
                 "disaster_name":disaster_name,
                 "disaster_date":disaster_date
             }
-            Mongo.json2db(res,"dom","eq")
+            Mongo.json2db(res,"dummy","eq")
 
         outputFile.flush()
         print('More %d saved on file...\n' % len(tweets))

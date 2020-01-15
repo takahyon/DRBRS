@@ -1,5 +1,0 @@
-pyquery
-pymongo
-numpy
-seaborn
-GetOldTweets3
