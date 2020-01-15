@@ -25,15 +25,19 @@ def show_dom(disaster_name):
     timelist = []
     query = {"disaster_name":disaster_name}
     for post in tqdm(collection.find(query)):
-        dt = datetime.strptime(post['date'], '%Y-%m-%d %H:%M')
-        timelist.append(dt)
+        dt = datetime.strptime(post['date'], '%Y-%m-%d %H:%M:%S')
+        dt2 = "{0:%Y-%m-%d %H:%M}".format(dt)
+        timelist.append(datetime.strptime(dt2,'%Y-%m-%d %H:%M'))
         # ここのみ、seabornを用いて可視化
 
     from collections import Counter
 
     count = Counter(timelist)
 
-    delta = timedelta(days=1)
+    dd = datetime.strptime(disaster_date,'%Y-%m-%d %H:%M:%S')
+    since = dd+timedelta(hours=-2)
+    until = dd+timedelta(hours=+1)
+    plt.xlim([since,until])
 
     data_x = []
     data_y = []
@@ -42,9 +46,12 @@ def show_dom(disaster_name):
         data_x.append(x)
         data_y.append(y)
 
+    #plt.ylim([0,10])
     sns.lineplot(data_x,data_y)
-
+    plt.scatter(dd, -1, s=300, marker="^",c="red")
     plt.title(disaster_name)
+    plt.xlabel('Timeline from Disaster')
+    plt.ylabel('Amount of Tweets')
     plt.show()
 
 if __name__ == '__main__':

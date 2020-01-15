@@ -57,16 +57,16 @@ def get_data(disasterlistpath, maxTweet=None):
 
 def get_data_process(disaster_name,disaster_date,maxTweet):
     disaster_date = datetime.strptime(disaster_date,"%Y-%m-%d %H:%M:%S")
-    since = disaster_date + timedelta(hours=-1)
-    until = disaster_date + timedelta(hours=+3)
+    since = disaster_date + timedelta(hours=-2)
+    until = disaster_date + timedelta(hours=+1)
 
-    sincestr = since.strftime("%Y-%m-%d")
-    untilstr = until.strftime("%Y-%m-%d")
+    sincestr = since.strftime("%Y-%m-%d_%H:%M:%S_JST")
+    untilstr = until.strftime("%Y-%m-%d_%H:%M:%S_JST")
 
     if maxTweet is not None:
-        tweetCriteria = got.manager.TweetCriteria().setSince(sincestr).setUntil(untilstr).setMaxTweets(maxTweet).setQuerySearch("地震")
+        tweetCriteria = got.manager.TweetCriteria().setSince(sincestr).setUntil(untilstr).setMaxTweets(maxTweet).setQuerySearch("地震").setTopTweets(True)
     if maxTweet is None:
-        tweetCriteria = got.manager.TweetCriteria().setSince(sincestr).setUntil(untilstr).setMaxTweets(100000).setQuerySearch("地震")
+        tweetCriteria = got.manager.TweetCriteria().setSince(sincestr).setUntil(untilstr).setMaxTweets(100000).setQuerySearch("地震").setTopTweets(True)
 
     #tweets = got.manager.TweetManager.getTweets(tweetCriteria)
 
@@ -86,7 +86,7 @@ def get_data_process(disaster_name,disaster_date,maxTweet):
             t.id, t.permalink)))
             res = {
                 "username" :t.username,
-                "date" :t.date.strftime("%Y-%m-%d %H:%M"),
+                "date" :(t.date+timedelta(hours=+9)).strftime("%Y-%m-%d %H:%M:%S"),
                 "retweets" :t.retweets,
                 "favorites" :t.favorites,
                 "text" :t.text,
@@ -105,7 +105,7 @@ def get_data_process(disaster_name,disaster_date,maxTweet):
 
 
     got.manager.TweetManager.getTweets(tweetCriteria, receiveBuffer)
-    Mongo.save2db(outputFileName,"tweet")
+    # Mongo.save2db(outputFileName,"tweet")
     #print("---------------------------------")
     #print("④期間を指定して取得")
     #print_tweets(tweets)

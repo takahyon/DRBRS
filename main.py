@@ -16,17 +16,7 @@ def main():
     process_list = []
 
     for disaster_name, disaster_date in disaster_list.items():
-        process = Process(
-            target=get_from_twitter.get_data_process,
-            kwargs={'disaster_name': disaster_name,"disaster_date":disaster_date,"maxTweet":None}
-        )
-        show_data.show_dom(disaster_name)
-        process.start()
-        process_list.append(process)
-
-    for process in process_list:
-        process.join()
-
+        get_from_twitter.get_data_process(disaster_name=disaster_name,disaster_date=disaster_date,maxTweet=100000)
         # twitterからデータ取得 csv作成
     #get_from_twitter.get_data()
 
